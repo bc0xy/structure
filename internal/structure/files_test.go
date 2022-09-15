@@ -34,7 +34,7 @@ func getTestDirAndGoFiles(t *testing.T) (string, []string, error) {
 	assert.Nil(t, err, "创建b.go失败")
 	defer b.Close()
 
-	return dir, []string{"a.go", "b.go"}, nil
+	return dir, []string{fileA, fileB}, nil
 }
 
 func TestGetGoFilesInCurrentDir(t *testing.T) {

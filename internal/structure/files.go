@@ -3,6 +3,7 @@ package structure
 import (
 	"io/fs"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -21,7 +22,7 @@ func GetGoFiles(dir string) ([]string, error) {
 	}
 	return lo.FilterMap(dirEntry, func(x fs.DirEntry, _ int) (string, bool) {
 		if !x.IsDir() && strings.HasSuffix(x.Name(), ".go") && !strings.HasSuffix(x.Name(), "_test.go") {
-			return x.Name(), true
+			return filepath.Join(dir, x.Name()), true
 		}
 		return "", false
 	}), nil
