@@ -46,7 +46,7 @@ func GetImportPackages(goFiles ...string) ([]string, error) {
 				return "", false
 			}
 
-			return string(pkg[start+1 : stop+1]), true
+			return string(pkg[start+1 : start+1+stop]), true
 		})...)
 	}
 
