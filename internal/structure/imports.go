@@ -9,12 +9,13 @@ import (
 	"github.com/samber/lo"
 )
 
+// GetImportPackages 获取go文件中依赖的库
 func GetImportPackages(goFiles ...string) ([]string, error) {
 	if len(goFiles) == 0 {
 		return []string{}, nil
 	}
 
-	packages := make([]string, 0, 10)
+	packages := make([]string, 0, 20)
 	for _, goFile := range goFiles {
 		content, err := os.ReadFile(goFile)
 		if err != nil {
@@ -49,5 +50,5 @@ func GetImportPackages(goFiles ...string) ([]string, error) {
 		})...)
 	}
 
-	return packages, nil
+	return lo.Uniq(packages), nil
 }

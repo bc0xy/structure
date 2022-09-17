@@ -8,10 +8,13 @@ import (
 	. "github.com/bc0xy/structure/internal/structure"
 )
 
+// TestGetImportPackages 测试imports.go的依赖库
 func TestGetImportPackages(t *testing.T) {
-	goFiles, err := GetGoFiles("")
-	assert.Nil(t, err, "获取当前目录go文件失败")
-	got, err := GetImportPackages(goFiles...)
+	got, err := GetImportPackages("imports.go")
 	assert.Nil(t, err, "获取当前目录下的依赖包失败")
-	assert.Equal(t, goFiles, got, "获取go文件失败")
+	assert.Equal(t, []string{
+		"os", "regexp", "strings",
+		"github.com/pkg/errors",
+		"github.com/samber/lo",
+	}, got, "获取go文件失败")
 }
